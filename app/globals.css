@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical CSS for Core Web Vitals - Reduce CLS and improve LCP */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent layout shift from scrollbars */
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+/* Reserve space for dynamic content */
+body {
+  min-height: 100vh;
+}
+
+/* Prevent image CLS */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Font display strategy to reduce CLS */
+@supports (font-display: swap) {
+  * {
+    font-display: swap;
+  }
+}
+
 :root {
   --background: #000000;
   --foreground: #ffffff;
