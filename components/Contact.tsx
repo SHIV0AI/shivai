@@ -156,7 +156,7 @@ const Contact = () => {
             </span>
           </motion.div>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-themed-primary">
-            Let's Build the <span className="gradient-text">Future Together</span>
+            Let&apos;s Build the <span className="gradient-text">Future Together</span>
           </h2>
           <p className="text-xl text-themed-secondary max-w-3xl mx-auto">
             Ready to transform your business with AI? Our team of experts is
@@ -539,7 +539,7 @@ const Contact = () => {
                 transition={{ delay: 0.4 }}
                 className="text-gray-300 mb-6"
               >
-                Thank you for reaching out! We'll get back to you within 24 hours.
+                Thank you for reaching out! We&apos;ll get back to you within 24 hours.
               </motion.p>
 
               {/* Auto-dismiss indicator */}

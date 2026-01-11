@@ -152,11 +152,15 @@ export function FeatureTracker({ featureName, children }: FeatureComponentProps)
       timestamp: new Date().toISOString(),
     });
 
+    // Save ref values to variables for cleanup function
+    const startTime = startTimeRef.current;
+    const interactionCount = interactionCountRef.current;
+
     return () => {
       // Track feature exit
-      const sessionDuration = Math.round((Date.now() - startTimeRef.current) / 1000);
+      const sessionDuration = Math.round((Date.now() - startTime) / 1000);
       analytics.trackFeatureUsage(featureName, 'exit', {
-        total_interactions: interactionCountRef.current,
+        total_interactions: interactionCount,
         session_duration: sessionDuration,
       });
     };
@@ -361,11 +365,15 @@ export function ThreeDModel({ modelName }: ThreeDModelProps) {
       viewer_type: '3d_canvas',
     });
 
+    // Save ref values to variables for cleanup function
+    const interactionCount = interactionCountRef.current;
+    const startTime = startTimeRef.current;
+
     return () => {
       // Track exit
       analytics.trackFeatureUsage(modelName, 'exit', {
-        total_interactions: interactionCountRef.current,
-        session_duration: Math.round((Date.now() - startTimeRef.current) / 1000),
+        total_interactions: interactionCount,
+        session_duration: Math.round((Date.now() - startTime) / 1000),
       });
     };
   }, [modelName, analytics]);

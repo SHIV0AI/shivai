@@ -51,7 +51,7 @@ const HowItWorks = () => {
       details: ["Knowledge Agents", "Sales Agents", "Content Generation", "Broadcaster Agents", "Analytics Agents", "Support Agents"],
       icon: "🚀",
       color: "purple",
-      narrative: "These aren't just tools - they're autonomous team members that learn, adapt, and improve every single day."
+      narrative: "These aren&apos;t just tools - they&apos;re autonomous team members that learn, adapt, and improve every single day."
     },
     {
       number: "04",
@@ -177,11 +177,11 @@ const HowItWorks = () => {
           </h2>
           <p className="text-xl text-themed-secondary max-w-4xl mx-auto leading-relaxed mb-8">
             Imagine a world where your business runs autonomously, with intelligent agents handling everything 
-            from sales to customer support. Here's how we make it happen...
+            from sales to customer support. Here&apos;s how we make it happen...
           </p>
           <p className="text-lg text-themed-secondary max-w-3xl mx-auto leading-relaxed italic">
-            "We can't give everyone human interns or assistants, but we can give you an army of 
-            <span className="font-bold text-purple-600 dark:text-purple-400"> AI agents</span> working 24/7 for your success."
+            &quot;We can&apos;t give everyone human interns or assistants, but we can give you an army of 
+            <span className="font-bold text-purple-600 dark:text-purple-400"> AI agents</span> working 24/7 for your success.&quot;
           </p>
         </motion.div>
 
@@ -502,7 +502,7 @@ const HowItWorks = () => {
           </h3>
           <p className="text-xl text-themed-secondary mb-12 max-w-3xl mx-auto">
             Your business transforms from a traditional operation into a hyper-intelligent, self-evolving organism. 
-            Here's what changes:
+            Here&apos;s what changes:
           </p>
           <div className="grid md:grid-cols-3 gap-8">
             <div>
@@ -516,7 +516,7 @@ const HowItWorks = () => {
               <div className="text-5xl mb-4">⚡</div>
               <h4 className="text-xl font-bold mb-2 text-themed-primary">Never Sleep Again</h4>
               <p className="text-themed-secondary">
-                Your agents work 24/7/365. While you sleep, they're closing deals, creating content, and optimizing operations.
+                Your agents work 24/7/365. While you sleep, they&apos;re closing deals, creating content, and optimizing operations.
               </p>
             </div>
             <div>
@@ -551,7 +551,7 @@ const HowItWorks = () => {
               Fort Knox-Level Security for Your AI Agents
             </h3>
             <p className="text-xl text-themed-secondary max-w-3xl mx-auto">
-              We don't just build intelligent systems - we build <span className="font-bold text-themed-primary">secure intelligent systems</span>. 
+              We don&apos;t just build intelligent systems - we build <span className="font-bold text-themed-primary">secure intelligent systems</span>. 
               Every agent operates within strict access controls and permissions.
             </p>
           </div>
@@ -693,7 +693,7 @@ const HowItWorks = () => {
           </p>
           <p className="text-xl text-themed-secondary leading-relaxed">
             Your competitors are still doing it the old way - slowly hiring, slowly training, slowly growing. 
-            You'll be operating at <span className="font-bold text-purple-600 dark:text-purple-400">10x the speed</span> with 
+            You&apos;ll be operating at <span className="font-bold text-purple-600 dark:text-purple-400">10x the speed</span> with 
             <span className="font-bold text-cyan-600 dark:text-cyan-400"> infinite resources</span>.
           </p>
         </motion.div>

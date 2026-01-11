@@ -178,7 +178,7 @@ const About = () => {
             </motion.div>
             <h3 className="text-3xl font-bold mb-4 gradient-text relative z-10">Our Vision</h3>
             <p className="leading-relaxed text-lg relative z-10" style={{ color: theme === 'light' ? '#4b5563' : '#9ca3af' }}>
-              To be the world's most trusted AI partner, recognized for
+              To be the world&apos;s most trusted AI partner, recognized for
               delivering intelligent solutions that reshape industries and
               create lasting impact. We envision a future where AI enhances
               every aspect of business.

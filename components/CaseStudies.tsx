@@ -163,7 +163,7 @@ const CaseStudies = () => {
             Intelligent <span className="gradient-text">Agent Ecosystems</span>
           </h2>
           <p className="text-xl text-themed-secondary max-w-3xl mx-auto">
-            Discover how we've built autonomous agent systems that transform businesses through intelligent collaboration and decision-making.
+            Discover how we&apos;ve built autonomous agent systems that transform businesses through intelligent collaboration and decision-making.
           </p>
         </motion.div>
 
