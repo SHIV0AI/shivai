@@ -73,6 +73,18 @@ const nextConfig: NextConfig = {
   // Redirects for URL normalization
   async redirects() {
     return [
+      // Redirect index.html to root
+      {
+        source: '/index.html',
+        destination: '/',
+        permanent: true,
+      },
+      // Redirect index.php to root
+      {
+        source: '/index.php',
+        destination: '/',
+        permanent: true,
+      },
       // Redirect trailing slashes to non-trailing
       {
         source: '/:path+/',

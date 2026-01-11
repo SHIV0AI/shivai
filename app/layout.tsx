@@ -94,9 +94,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
-        {/* Canonical URL */}
-        <link rel="canonical" href={baseUrl} />
-        
         {/* Google Analytics 4 Global Site Tag */}
         {gaId && (
           <>

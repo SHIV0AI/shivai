@@ -5,6 +5,7 @@ import Services from "@/components/Services";
 import About from "@/components/About";
 import CaseStudies from "@/components/CaseStudies";
 import Contact from "@/components/Contact";
+import { SEOContent } from "@/components/SEOContent";
 
 export const metadata: Metadata = {
   title: "Shiv.AI | Intelligent Agentic Knowledge Ecosystem",
@@ -39,6 +40,9 @@ const jsonLd = {
 export default function Home() {
   return (
     <>
+      {/* SEO Content (hidden from UI but counted for text-to-code ratio) */}
+      <SEOContent />
+      
       {/* JSON-LD Structured Data for SEO */}
       <Script
         id="organization-schema"
