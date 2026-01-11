@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Testing Guide - Shiv.AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #0f3460;
+        }
+
+        h1 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #00d4ff;
+            opacity: 0.8;
+        }
+
+        .section {
+            background: rgba(15, 52, 96, 0.3);
+            border: 1px solid #0f3460;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .section h3 {
+            color: #ff006e;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #0f3460;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #00ff88;
+        }
+
+        button {
+            background: linear-gradient(135deg, #00d4ff 0%, #0084ff 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .output {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #0f3460;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .success {
+            color: #00ff88;
+        }
+
+        .error {
+            color: #ff006e;
+        }
+
+        .info {
+            color: #00d4ff;
+        }
+
+        .status {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .status-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #0f3460;
+        }
+
+        .status-item.active {
+            border-left-color: #00ff88;
+        }
+
+        .status-label {
+            color: #00d4ff;
+            font-size: 0.9em;
+        }
+
+        .status-value {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .test-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .test-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(15, 52, 96, 0.3);
+        }
+
+        .test-list li:before {
+            content: "▶ ";
+            color: #00d4ff;
+            margin-right: 10px;
+        }
+
+        .test-list li.done:before {
+            content: "✓ ";
+            color: #00ff88;
+        }
+
+        a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ff006e;
+        }
+
+        .warning {
+            background: rgba(255, 0, 110, 0.1);
+            border: 1px solid #ff006e;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            color: #ffaacc;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(15, 52, 96, 0.5);
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Analytics Testing Center</h1>
+            <p class="subtitle">Complete testing suite for Shiv.AI website analytics</p>
+        </header>
+
+        <div class="section">
+            <h2>🚀 Quick Start</h2>
+            <p>Follow these steps to test analytics in real-time:</p>
+            <ol style="margin-left: 20px; margin-top: 15px;">
+                <li>Make sure development server is running: <code>npm run dev</code></li>
+                <li>Navigate to the website: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
+                <li>Open browser Developer Tools: Press <strong>F12</strong></li>
+                <li>Click a button below to run tests or interact with the website</li>
+                <li>Watch the output in the console</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Analytics Status</h2>
+            <button onclick="checkAnalyticsStatus()">Check Status</button>
+            <div id="statusOutput" class="output" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Test Suite</h2>
+            <p>Run comprehensive analytics tests:</p>
+            
+            <button onclick="runAllTests()">Run All Tests</button>
+            <button onclick="clearEvents()">Clear Events</button>
+            <button onclick="viewEvents()">View All Events</button>
+            
+            <div id="testOutput" class="output" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Individual Tests</h2>
+            <p>Run specific analytics tests:</p>
+            
+            <h3>Basic Tracking</h3>
+            <button onclick="testEventTracking()">Track Event</button>
+            <button onclick="testPageView()">Track Page View</button>
+            <button onclick="testConversion()">Track Conversion</button>
+            
+            <h3>Interactions</h3>
+            <button onclick="testUserInteraction()">Track Interaction</button>
+            <button onclick="testScrollDepth()">Track Scroll</button>
+            <button onclick="testExternalLink()">Track External Link</button>
+            
+            <h3>Advanced</h3>
+            <button onclick="testCTA()">Track CTA</button>
+            <button onclick="testFeature()">Track Feature</button>
+            <button onclick="testError()">Track Error</button>
+            
+            <div id="testIndividualOutput" class="output" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h2>🔗 Analytics Dashboards</h2>
+            <p>View your analytics data in real dashboards:</p>
+            <ul class="test-list">
+                <li>
+                    <a href="https://analytics.google.com" target="_blank">🔍 Google Analytics 4 Dashboard</a>
+                    <div style="margin-top: 5px; color: #888; font-size: 0.9em;">Property ID: G-7CZHOLYYPC</div>
+                </li>
+                <li>
+                    <a href="https://clarity.microsoft.com" target="_blank">🎥 Microsoft Clarity Dashboard</a>
+                    <div style="margin-top: 5px; color: #888; font-size: 0.9em;">Project ID: uyricts64v</div>
+                </li>
+                <li>
+                    <a href="http://localhost:3000" target="_blank">🌐 Website (Dev)</a>
+                    <div style="margin-top: 5px; color: #888; font-size: 0.9em;">http://localhost:3000</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📚 Documentation</h2>
+            <ul class="test-list">
+                <li><a href="./ANALYTICS.md" target="_blank">Complete Analytics Guide</a></li>
+                <li><a href="./TESTING_ANALYTICS.md" target="_blank">Testing Guide</a></li>
+                <li><a href="./PRODUCTION_CHECKLIST.md" target="_blank">Production Checklist</a></li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Note:</strong> Data from Google Analytics and Clarity dashboards may take up to 24 hours to appear in their respective dashboards. Local events will be visible immediately in the browser console.
+        </div>
+
+        <div class="footer">
+            <p>🚀 Analytics Testing Center | Shiv.AI Website</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Open browser console (F12) for detailed output</p>
+        </div>
+    </div>
+
+    <script>
+        // Utility functions for testing
+        function log(message, type = 'info') {
+            const prefix = {
+                'success': '✅',
+                'error': '❌',
+                'info': 'ℹ️',
+                'warning': '⚠️'
+            }[type] || 'ℹ️';
+            
+            console.log(`${prefix} ${message}`);
+        }
+
+        function checkAnalyticsStatus() {
+            const output = document.getElementById('statusOutput');
+            output.style.display = 'block';
+            output.innerHTML = '';
+
+            try {
+                // Wait for analytics to be available
+                if (typeof analytics === 'undefined') {
+                    output.innerHTML = `<span class="error">❌ Analytics not initialized. Navigate to website first.</span>`;
+                    return;
+                }
+
+                const status = analytics.getStatus();
+                
+                let html = '<div class="status">';
+                html += `<div class="status-item ${status.isProduction ? 'active' : ''}">
+                    <div class="status-label">Environment</div>
+                    <div class="status-value">${status.isProduction ? 'Production' : 'Development'}</div>
+                </div>`;
+                html += `<div class="status-item ${status.googleAnalyticsEnabled ? 'active' : ''}">
+                    <div class="status-label">GA4 Enabled</div>
+                    <div class="status-value">${status.googleAnalyticsEnabled ? 'Yes' : 'No'}</div>
+                </div>`;
+                html += `<div class="status-item ${status.clarityEnabled ? 'active' : ''}">
+                    <div class="status-label">Clarity Enabled</div>
+                    <div class="status-value">${status.clarityEnabled ? 'Yes' : 'No'}</div>
+                </div>`;
+                html += `<div class="status-item ${status.errorTrackingEnabled ? 'active' : ''}">
+                    <div class="status-label">Error Tracking</div>
+                    <div class="status-value">${status.errorTrackingEnabled ? 'Yes' : 'No'}</div>
+                </div>`;
+                html += `<div class="status-item active">
+                    <div class="status-label">Tracked Events</div>
+                    <div class="status-value">${status.eventCount}</div>
+                </div>`;
+                html += '</div>';
+
+                output.innerHTML = `<span class="success">✅ Analytics Status:</span><br><br>${html}`;
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function runAllTests() {
+            const output = document.getElementById('testOutput');
+            output.style.display = 'block';
+            output.innerHTML = '';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized. Navigate to website first.</span>`;
+                return;
+            }
+
+            try {
+                output.innerHTML += '<span class="info">🚀 Running All Tests...</span><br><br>';
+
+                // Test 1
+                analytics.clearLocalEvents();
+                analytics.trackEvent({ category: "test", action: "event", value: 42 });
+                output.innerHTML += '<span class="success">✅ Event Tracking</span><br>';
+
+                // Test 2
+                analytics.trackPageView({ path: "/test", title: "Test Page" });
+                output.innerHTML += '<span class="success">✅ Page View Tracking</span><br>';
+
+                // Test 3
+                analytics.trackConversion("test", 100);
+                output.innerHTML += '<span class="success">✅ Conversion Tracking</span><br>';
+
+                // Test 4
+                analytics.trackUserInteraction("click", "test_button");
+                output.innerHTML += '<span class="success">✅ User Interaction</span><br>';
+
+                // Test 5
+                analytics.trackScrollDepth(50);
+                output.innerHTML += '<span class="success">✅ Scroll Depth</span><br>';
+
+                // Test 6
+                analytics.trackExternalLink("https://example.com", "Test");
+                output.innerHTML += '<span class="success">✅ External Link</span><br>';
+
+                // Test 7
+                analytics.trackCTAClick("test_cta");
+                output.innerHTML += '<span class="success">✅ CTA Click</span><br>';
+
+                // Test 8
+                analytics.trackFeatureUsage("test_feature", "use");
+                output.innerHTML += '<span class="success">✅ Feature Usage</span><br>';
+
+                const events = analytics.getLocalEvents();
+                output.innerHTML += `<br><span class="info">Total Events: ${events.length}</span><br>`;
+                output.innerHTML += `<br><span class="success">✅ All Tests Complete!</span>`;
+            } catch (e) {
+                output.innerHTML += `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function clearEvents() {
+            const output = document.getElementById('testOutput');
+            output.style.display = 'block';
+            
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            analytics.clearLocalEvents();
+            output.innerHTML = `<span class="success">✅ All events cleared</span>`;
+        }
+
+        function viewEvents() {
+            const output = document.getElementById('testOutput');
+            output.style.display = 'block';
+            
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            const events = analytics.getLocalEvents();
+            let html = `<span class="success">✅ Total Events: ${events.length}</span><br><br>`;
+            
+            if (events.length === 0) {
+                html += '<span class="info">No events tracked yet. Interact with the website.</span>';
+            } else {
+                html += '<pre>' + JSON.stringify(events, null, 2) + '</pre>';
+            }
+            
+            output.innerHTML = html;
+        }
+
+        function testEventTracking() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+            output.innerHTML = '';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackEvent({ category: "manual_test", action: "event", value: 42 });
+                output.innerHTML = '<span class="success">✅ Event tracked successfully</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testPageView() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackPageView({ path: "/manual-test", title: "Manual Test" });
+                output.innerHTML = '<span class="success">✅ Page view tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testConversion() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackConversion("test_conversion", 99.99);
+                output.innerHTML = '<span class="success">✅ Conversion tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testUserInteraction() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackUserInteraction("click", "test_button");
+                output.innerHTML = '<span class="success">✅ User interaction tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testScrollDepth() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackScrollDepth(75);
+                output.innerHTML = '<span class="success">✅ Scroll depth tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testExternalLink() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackExternalLink("https://example.com", "Example");
+                output.innerHTML = '<span class="success">✅ External link tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testCTA() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackCTAClick("test_cta", "section");
+                output.innerHTML = '<span class="success">✅ CTA click tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testFeature() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackFeatureUsage("test_feature", "interaction");
+                output.innerHTML = '<span class="success">✅ Feature usage tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+
+        function testError() {
+            const output = document.getElementById('testIndividualOutput');
+            output.style.display = 'block';
+
+            if (typeof analytics === 'undefined') {
+                output.innerHTML = `<span class="error">❌ Analytics not initialized.</span>`;
+                return;
+            }
+
+            try {
+                analytics.trackEvent({ category: "error", action: "test_error", label: "Test Error" });
+                output.innerHTML = '<span class="success">✅ Error tracked</span>';
+            } catch (e) {
+                output.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

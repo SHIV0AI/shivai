@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --background-secondary: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #111827;
+  --background-secondary: #f8fafc;
+  --text-primary: #111827;
+  --text-secondary: #475569;
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+  
+  html[data-theme="light"] {
+    color-scheme: light;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600;
+  }
+  
+  [data-theme="dark"] .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-orange-500;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-lg border;
+  }
+  
+  [data-theme="dark"] .glass-effect {
+    @apply bg-white/5 border-white/10;
+  }
+  
+  [data-theme="light"] .glass-effect {
+    @apply bg-white/80 border-gray-200 shadow-lg;
+  }
+  
+  /* Light mode button text override */
+  [data-theme="light"] .glass-effect {
+    color: #111827;
+  }
+  
+  [data-theme="dark"] .glass-effect {
+    color: #ffffff;
+  }
+  
+  .text-themed-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-themed-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .bg-themed {
+    background-color: var(--background);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4),
+                0 0 40px rgba(147, 51, 234, 0.3),
+                0 0 60px rgba(249, 115, 22, 0.2);
+  }
+  
+  [data-theme="light"] .glow-effect {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3),
+                0 0 40px rgba(147, 51, 234, 0.2),
+                0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Enhanced light mode styles */
+  [data-theme="light"] .bg-gradient-primary {
+    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600;
+  }
+  
+  .bg-themed-primary {
+    background-color: var(--text-primary);
+  }
+  
+  .bg-themed-secondary {
+    background-color: var(--text-secondary);
+  }
+  
+  /* Button enhancements for light mode */
+  [data-theme="light"] button {
+    @apply shadow-md;
+  }
+  
+  [data-theme="light"] .glass-effect:hover {
+    @apply bg-white/90 shadow-xl;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6 0%, #9333ea 50%, #ea580c 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ea580c 0%, #9333ea 50%, #3b82f6 100%);
+}
