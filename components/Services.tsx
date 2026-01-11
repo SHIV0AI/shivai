@@ -102,7 +102,7 @@ const Services = () => {
     },
   ];
 
-  const displayedServices = !showAll ? services : services.slice(0, 3);
+  const displayedServices = showAll ? services : services.slice(0, 3);
 
   const containerVariants = {
     hidden: { opacity: 0 },

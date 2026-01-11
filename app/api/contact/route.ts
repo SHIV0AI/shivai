@@ -3,9 +3,15 @@ import * as fs from 'fs';
 import * as path from 'path';
 import nodemailer from 'nodemailer';
 
-// Store submissions in a text file
+// Store submissions in a text file (only for local development)
 function storeSubmission(data: any) {
   try {
+    // Only store locally in development, not in production serverless environments
+    if (process.env.NODE_ENV === 'production') {
+      console.log('Production mode: Skipping local file storage (read-only filesystem)');
+      return true; // Return success anyway since we're sending email
+    }
+
     const timestamp = new Date().toISOString();
     const submissionText = `
 =====================================
@@ -30,10 +36,12 @@ Message: ${data.message}
     const filePath = path.join(submissionsDir, fileName);
     
     fs.writeFileSync(filePath, submissionText, 'utf-8');
+    console.log('Submission stored locally:', fileName);
     return true;
   } catch (error) {
-    console.error('Error storing submission:', error);
-    return false;
+    console.error('Error storing submission locally:', error);
+    // Don't fail - we'll send email instead
+    return true;
   }
 }
 
@@ -96,30 +104,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store the submission
-    const stored = storeSubmission(data);
+    // Try to store the submission (will be skipped in production)
+    storeSubmission(data);
     
-    if (!stored) {
-      return NextResponse.json(
-        { error: 'Failed to store submission' },
-        { status: 500 }
-      );
-    }
-
     // Send email notification
-    await sendEmail(data);
+    const emailSent = await sendEmail(data);
 
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Thank you for your submission! We will get back to you soon.' 
+        message: 'Thank you for your submission! We will get back to you soon.',
+        emailSent: emailSent
       },
       { status: 200 }
     );
   } catch (error) {
     console.error('Contact API error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
