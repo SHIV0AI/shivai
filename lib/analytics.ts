@@ -64,29 +64,24 @@ class Analytics {
 
   /**
    * Initialize Google Analytics 4
+   * Note: gtag script is loaded via Next.js Script component in layout.tsx
+   * This method ensures gtag is ready before tracking events
    */
   private initializeGoogleAnalytics(): void {
     if (typeof window === "undefined") return;
 
-    // Create gtag script
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${this.gaId}`;
-    document.head.appendChild(script);
-
-    // Initialize gtag
-    (window as any).dataLayer = (window as any).dataLayer || [];
-    (window as any).gtag = function () {
-      (window as any).dataLayer.push(arguments);
-    };
-    (window as any).gtag("js", new Date());
-    (window as any).gtag("config", this.gaId, {
-      page_path: window.location.pathname,
-      allow_google_signals: false,
-      anonymize_ip: true,
-    });
-
-    console.log("✅ Google Analytics 4 initialized");
+    // Wait for gtag to be available (loaded via Script component)
+    let attempts = 0;
+    const checkGtag = setInterval(() => {
+      if ((window as any).gtag) {
+        clearInterval(checkGtag);
+        console.log("✅ Google Analytics 4 ready (gtag loaded via Script component)");
+      } else if (attempts++ > 50) {
+        // Timeout after ~5 seconds
+        clearInterval(checkGtag);
+        console.warn("⚠️  Google Analytics 4 gtag not loaded within timeout");
+      }
+    }, 100);
   }
 
   /**

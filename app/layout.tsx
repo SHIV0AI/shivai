@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import ThemeWrapper from "./theme-wrapper";
@@ -38,8 +39,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+
   return (
     <html lang="en">
+      <head>
+        {/* Google Analytics 4 Global Site Tag */}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+              async
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}', {
+                    page_path: window.location.pathname,
+                    allow_google_signals: false,
+                    anonymize_ip: true,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+      </head>
       <body className={`${inter.variable} font-sans antialiased bg-themed text-themed-primary`}>
         <AnalyticsProvider>
           <ThemeWrapper>
