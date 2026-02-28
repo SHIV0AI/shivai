@@ -3,7 +3,98 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
-const HowItWorks = () => {
+/* Lightweight animated data-pipeline diagram inserted after Step 01 */
+const DataPipelineViz = ({ isInView }: { isInView: boolean }) => {
+  const sources = [
+    { icon: "💼", label: "Sales" },
+    { icon: "👥", label: "HR" },
+    { icon: "📈", label: "Marketing" },
+    { icon: "⚙️", label: "Operations" },
+  ];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="relative glass-effect rounded-2xl p-8 overflow-hidden"
+    >
+      <h4 className="text-center text-lg font-semibold text-themed-secondary mb-8">
+        <span className="gradient-text-neon">Data Collection Pipeline</span>
+      </h4>
+
+      <div className="flex items-center justify-center gap-2 md:gap-4 flex-wrap">
+        {/* Source nodes */}
+        <div className="grid grid-cols-2 gap-3">
+          {sources.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.5 + i * 0.1 }}
+              className="flex items-center gap-2 glass-effect px-3 py-2 rounded-lg text-sm"
+            >
+              <span className="text-lg">{s.icon}</span>
+              <span className="text-themed-secondary text-xs font-medium">{s.label}</span>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Animated arrows */}
+        <div className="flex flex-col items-center gap-1 px-2">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-6 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full"
+              animate={{ opacity: [0.3, 1, 0.3], scaleX: [0.6, 1, 0.6] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.3 }}
+            />
+          ))}
+        </div>
+
+        {/* Central hub */}
+        <motion.div
+          className="relative flex-shrink-0"
+          animate={{ boxShadow: ["0 0 15px rgba(0,255,245,0.2)", "0 0 30px rgba(0,255,245,0.4)", "0 0 15px rgba(0,255,245,0.2)"] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/40 flex items-center justify-center">
+            <span className="text-2xl">🗄️</span>
+          </div>
+          <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-themed-secondary whitespace-nowrap">Unified Data</span>
+        </motion.div>
+
+        {/* Animated arrows */}
+        <div className="flex flex-col items-center gap-1 px-2">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-6 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+              animate={{ opacity: [0.3, 1, 0.3], scaleX: [0.6, 1, 0.6] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.3 + 0.6 }}
+            />
+          ))}
+        </div>
+
+        {/* Output */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: 0.9 }}
+          className="glass-effect px-4 py-3 rounded-xl text-center"
+        >
+          <span className="text-2xl block mb-1">🧠</span>
+          <span className="text-xs text-themed-secondary font-medium">Knowledge<br />Graph</span>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+interface HowItWorksProps {
+  knowledgeGraphSlot?: React.ReactNode;
+}
+
+const HowItWorks = ({ knowledgeGraphSlot }: HowItWorksProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [theme, setTheme] = useState("dark");
@@ -187,9 +278,9 @@ const HowItWorks = () => {
 
         {/* Process Steps */}
         <div className="space-y-24 mb-24">
-          {steps.map((step, index) => {
+          {steps.flatMap((step, index) => {
             const colorClasses = getColorClasses(step.color);
-            return (
+            const elements: React.ReactNode[] = [
               <motion.div
                 key={step.number}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
@@ -197,47 +288,22 @@ const HowItWorks = () => {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 className={`relative flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12`}
               >
-                {/* Floating particles around icon */}
-                {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={`particle-${index}-${i}`}
-                    className="absolute w-2 h-2 bg-purple-500 rounded-full opacity-40"
-                    style={{
-                      left: index % 2 === 0 ? '10%' : 'auto',
-                      right: index % 2 === 0 ? 'auto' : '10%',
-                    }}
-                    animate={{
-                      y: [0, -30, 0],
-                      x: [0, Math.random() * 20 - 10, 0],
-                      opacity: [0, 0.6, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: i * 0.4,
-                    }}
-                  />
-                ))}
-
                 {/* Icon & Number */}
                 <motion.div 
                   className="flex-shrink-0 relative"
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {/* Rotating ring around icon */}
-                  <motion.div
-                    className={`absolute inset-0 rounded-2xl border-2 ${colorClasses.border}`}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  {/* Subtle border glow (replaces rotating ring + floating particles) */}
+                  <div
+                    className={`absolute inset-0 rounded-2xl border ${colorClasses.border} opacity-40`}
                     style={{ width: '140px', height: '140px', margin: '-4px' }}
                   />
                   
                   <div className={`relative w-32 h-32 glass-effect rounded-2xl flex items-center justify-center border-2 ${colorClasses.border} hover:${colorClasses.glow} hover:shadow-2xl transition-all group cursor-pointer`}>
                     <motion.div 
                       className="text-6xl"
-                      whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.2 }}
-                      transition={{ duration: 0.5 }}
+                      whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.2 }}                      transition={{ duration: 0.5 }}
                     >
                       {step.icon}
                     </motion.div>
@@ -315,7 +381,34 @@ const HowItWorks = () => {
                   </div>
                 </motion.div>
               </motion.div>
-            );
+            ];
+
+            {/* After "We Listen to Your Story" — Data Pipeline Visualization */}
+            if (index === 0) {
+              elements.push(<DataPipelineViz key="data-pipeline-viz" isInView={isInView} />);
+            }
+
+            {/* After "We Build Your Brain" — Knowledge Graph Visualization */}
+            if (index === 1 && knowledgeGraphSlot) {
+              elements.push(
+                <motion.div
+                  key="knowledge-graph-viz"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="relative"
+                >
+                  <div className="text-center mb-8">
+                    <span className="glass-effect px-6 py-2 rounded-full text-sm text-blue-600 dark:text-blue-400">
+                      🧠 Knowledge Graph — Live Visualization
+                    </span>
+                  </div>
+                  {knowledgeGraphSlot}
+                </motion.div>
+              );
+            }
+
+            return elements;
           })}
         </div>
 
@@ -343,46 +436,22 @@ const HowItWorks = () => {
               className="flex justify-center mb-16"
             >
               <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  boxShadow: [
-                    "0 0 20px rgba(147, 51, 234, 0.5)",
-                    "0 0 40px rgba(147, 51, 234, 0.8)",
-                    "0 0 20px rgba(147, 51, 234, 0.5)",
-                  ],
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="relative"
               >
                 <div className="w-48 h-48 bg-gradient-primary rounded-full flex items-center justify-center glow-effect cursor-pointer hover:scale-110 transition-transform">
                   <div className="text-center">
-                    <motion.div 
-                      className="text-6xl mb-2"
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
+                    <div className="text-6xl mb-2">
                       🎯
-                    </motion.div>
+                    </div>
                     <div className="font-bold text-white text-lg">Orchestrator</div>
                     <div className="text-sm text-white/80">Master Agent</div>
                   </div>
                 </div>
-                {/* Pulse rings */}
+                {/* Single subtle pulse ring */}
                 <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-purple-500"
-                  animate={{
-                    scale: [1, 1.5, 1.5],
-                    opacity: [0.5, 0, 0],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-cyan-500"
-                  animate={{
-                    scale: [1, 1.5, 1.5],
-                    opacity: [0.5, 0, 0],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  className="absolute inset-0 rounded-full border border-purple-500/30"
+                  animate={{ scale: [1, 1.3], opacity: [0.4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
                 />
               </motion.div>
             </motion.div>
@@ -441,48 +510,19 @@ const HowItWorks = () => {
                     }}
                     className={`glass-effect p-6 rounded-2xl text-center hover:border-purple-500/70 transition-all cursor-pointer bg-gradient-to-br ${agent.color} bg-opacity-10 relative overflow-hidden h-full`}
                   >
-                    {/* Animated background effect */}
-                    <motion.div
-                      className="absolute inset-0 opacity-0 hover:opacity-10"
-                      animate={{
-                        background: [
-                          "radial-gradient(circle at 0% 0%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)",
-                          "radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.3) 0%, transparent 50%)",
-                          "radial-gradient(circle at 0% 0%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)",
-                        ],
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    />
-                    
-                    <motion.div
+                    <div
                       className="text-5xl mb-3"
-                      whileHover={{ scale: 1.3, rotate: 360 }}
-                      transition={{ duration: 0.5 }}
                     >
                       {index === 0 ? "🧠" : index === 1 ? "💼" : index === 2 ? "✨" : index === 3 ? "📢" : index === 4 ? "📊" : "💬"}
-                    </motion.div>
+                    </div>
                     <h4 className="font-bold mb-2 text-white text-lg">{agent.name}</h4>
                     <p className="text-sm text-gray-400 mb-3">{agent.description}</p>
                     
                     {/* Status indicator */}
                     <div className="flex items-center justify-center space-x-1">
-                      <motion.div
-                        className="w-2 h-2 bg-green-500 rounded-full"
-                        animate={{ opacity: [1, 0.3, 1], scale: [1, 1.2, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      />
+                      <div className="w-2 h-2 bg-green-500 rounded-full" />
                       <span className="text-xs text-green-400">Active</span>
                     </div>
-
-                    {/* Particle effect on hover */}
-                    <motion.div
-                      className="absolute top-2 right-2 w-2 h-2 bg-cyan-400 rounded-full"
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.3, 0.8, 0.3],
-                      }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                    />
                   </motion.div>
                 </motion.div>
               ))}
@@ -604,13 +644,9 @@ const HowItWorks = () => {
                           <p className="text-sm opacity-90 mb-1">{tier.access}</p>
                           <p className="text-xs opacity-75">👥 {tier.users}</p>
                         </div>
-                        <motion.div
-                          animate={{ rotate: [0, 360] }}
-                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                          className="text-3xl opacity-50"
-                        >
+                        <div className="text-3xl opacity-50">
                           🛡️
-                        </motion.div>
+                        </div>
                       </div>
                     </motion.div>
                   </div>
@@ -629,16 +665,12 @@ const HowItWorks = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
-                  whileHover={{ y: -10, scale: 1.03 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
                   className={`glass-effect p-6 rounded-xl text-center hover:border-purple-500/50 transition-all cursor-pointer border-2 ${colorClasses.border}`}
                 >
-                  <motion.div
-                    className="text-5xl mb-4"
-                    whileHover={{ scale: 1.3, rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
+                  <div className="text-5xl mb-4">
                     {feature.icon}
-                  </motion.div>
+                  </div>
                   <h4 className="text-lg font-bold mb-2 text-themed-primary">{feature.title}</h4>
                   <p className="text-sm text-themed-secondary mb-4">{feature.description}</p>
                   <div className="space-y-2">

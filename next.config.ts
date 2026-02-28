@@ -67,6 +67,16 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Cache JS/CSS bundles for 1 year
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
   
@@ -103,9 +113,24 @@ const nextConfig: NextConfig = {
     };
   },
   
+  // Cache JS/CSS bundles for 1 year
+  // (headers() above handles the rest)
+
   // Core Web Vitals optimizations
   experimental: {
-    optimizePackageImports: ['framer-motion', '@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: ['framer-motion', '@react-three/fiber', '@react-three/drei', 'three'],
+  },
+
+  // Webpack optimizations
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      // Tree-shake three.js — only pull modules actually imported
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'three/examples/jsm': 'three/examples/jsm',
+      };
+    }
+    return config;
   },
 };
 

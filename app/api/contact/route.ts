@@ -48,27 +48,31 @@ Message: ${data.message}
 // Send email notification
 async function sendEmail(data: any) {
   try {
-    // Create a test account if no email service is configured
-    // For production, use your own SMTP credentials
+    // Check if SMTP credentials are configured
+    if (!process.env.SMTP_USER || process.env.SMTP_USER === 'your-email@gmail.com' || process.env.SMTP_USER === 'your-gmail@gmail.com') {
+      console.log('Email service not configured, submission stored locally only');
+      return false;
+    }
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: process.env.SMTP_SECURE === 'true',
       auth: {
-        user: process.env.SMTP_USER || 'your-email@gmail.com',
-        pass: process.env.SMTP_PASSWORD || 'your-app-password',
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
       },
     });
 
     const mailOptions = {
       from: process.env.SMTP_FROM || 'noreply@shivai.com',
-      to: 'shiv0.0ai@gmail.com',
+      to: 'founders@shivai.co.in',
       subject: `New Contact Form Submission from ${data.name}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Company:</strong> ${data.company}</p>
+        <p><strong>Company:</strong> ${data.company || 'Not provided'}</p>
         <p><strong>Message:</strong></p>
         <p>${data.message.replace(/\n/g, '<br>')}</p>
         <hr>
@@ -84,11 +88,11 @@ async function sendEmail(data: any) {
       return true;
     } catch (emailError) {
       console.log('Email service not configured, submission stored locally only');
-      return true; // Still return success since we stored it locally
+      return false; // Email failed, but we stored it locally
     }
   } catch (error) {
     console.error('Error sending email:', error);
-    return true; // Still return success since we stored it locally
+    return false; // Email failed, but we stored it locally
   }
 }
 

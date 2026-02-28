@@ -235,6 +235,45 @@ class Analytics {
   }
 
   /**
+   * Track AI-specific interactions
+   */
+  trackAIInteraction(
+    component: string,
+    action: string,
+    metadata?: Record<string, any>
+  ): void {
+    this.trackEvent({
+      category: "ai_interaction",
+      action,
+      label: component,
+      metadata,
+    });
+  }
+
+  /**
+   * Track 3D component interactions
+   */
+  track3DInteraction(componentName: string, interactionType: string): void {
+    this.trackEvent({
+      category: "3d_interaction",
+      action: interactionType,
+      label: componentName,
+    });
+  }
+
+  /**
+   * Track demo usage
+   */
+  trackDemoUsage(demoType: string, action: string, metadata?: Record<string, any>): void {
+    this.trackEvent({
+      category: "demo",
+      action,
+      label: demoType,
+      metadata,
+    });
+  }
+
+  /**
    * Track CTA clicks
    */
   trackCTAClick(ctaName: string, section?: string): void {
