@@ -102,11 +102,11 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden glass-effect border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden glass-effect border-t border-white/10 transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen ? "max-h-screen opacity-100 visible" : "max-h-0 opacity-0 invisible"
         }`}
       >
-        <div className="px-4 py-6 space-y-4">
+        <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
           {navItems.map((item) => (
             <Link
               key={item.name}
