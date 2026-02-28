@@ -189,7 +189,7 @@ const EnhancedHeroAI = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.7 }}
           className="flex items-center justify-center gap-8 sm:gap-16 flex-wrap mt-12">
           <div className="hidden sm:block h-12 w-px" style={{ background: dark ? "rgba(0,255,245,0.1)" : "rgba(0,0,0,0.08)" }} />
-          <Stat value="5+" label="AI Agents Deployed" delay={0.8} color="#00fff5" />
+          <Stat value="15+" label="AI Agents Deployed" delay={0.8} color="#00fff5" />
           <div className="h-12 w-px" style={{ background: dark ? "rgba(191,0,255,0.1)" : "rgba(0,0,0,0.08)" }} />
           <Stat value="99.5%" label="Uptime SLA" delay={0.9} color="#bf00ff" />
           <div className="h-12 w-px" style={{ background: dark ? "rgba(255,0,110,0.1)" : "rgba(0,0,0,0.08)" }} />

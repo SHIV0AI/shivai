@@ -66,7 +66,7 @@ const quickLinks = [
 ];
 
 const stats = [
-  { value: "5+", label: "AI Agents Deployed", icon: "🤖" },
+  { value: "15+", label: "AI Agents Deployed", icon: "🤖" },
   { value: "99.5%", label: "Uptime SLA", icon: "⚡" },
   { value: "3x", label: "Faster Workflows", icon: "📈" },
   { value: "2", label: "Global Offices", icon: "🌍" },
