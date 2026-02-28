@@ -7,6 +7,7 @@ export const translations = {
       caseStudies: "Case Studies",
       contact: "Contact",
       getStarted: "Get Started",
+      aiLab: "AI Lab",
     },
     hero: {
       badge: "Intelligent Agentic Knowledge Ecosystem",
@@ -30,6 +31,40 @@ export const translations = {
       badge: "Get In Touch",
       title: "Let's Build Together",
       subtitle: "Start your AI transformation journey today",
+    },
+    aiDemo: {
+      badge: "Interactive Demo",
+      title: "Experience AI in Action",
+      subtitle: "Try our AI models live",
+      chatTab: "AI Chatbot",
+      playgroundTab: "Model Playground",
+      compareTab: "Compare Models",
+    },
+    locations: {
+      badge: "Global Presence",
+      title: "Our Offices",
+      subtitle: "Operating from India and Singapore",
+    },
+    techStack: {
+      badge: "Technology Stack",
+      title: "Our AI Tech Ecosystem",
+      subtitle: "Battle-tested technologies for enterprise AI",
+    },
+    metrics: {
+      title: "AI Capability Breakdown",
+      dataPoints: "Data Points Processed",
+      accuracy: "Model Accuracy",
+      models: "Models Trained",
+    },
+    pipeline: {
+      badge: "ML Architecture",
+      title: "Our ML Pipeline",
+      subtitle: "End-to-end machine learning workflow",
+    },
+    neuralLab: {
+      badge: "Interactive Lab",
+      title: "The Neural Lab",
+      subtitle: "Explore our AI infrastructure",
     },
   },
   es: {

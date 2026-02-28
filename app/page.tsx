@@ -1,11 +1,7 @@
 import { Metadata } from "next";
 import Script from "next/script";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import About from "@/components/About";
-import CaseStudies from "@/components/CaseStudies";
-import Contact from "@/components/Contact";
 import { SEOContent } from "@/components/SEOContent";
+import HomeClient from "@/components/HomeClient";
 
 export const metadata: Metadata = {
   title: "Shiv.AI | Intelligent Agentic Knowledge Ecosystem",
@@ -28,7 +24,7 @@ const jsonLd = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "contact@shivai.co.in",
+    email: "founders@shivai.co.in",
     url: "https://www.shivai.co.in/contact",
   },
   potentialAction: {
@@ -51,11 +47,7 @@ export default function Home() {
         strategy="afterInteractive"
       />
       
-      <Hero />
-      <Services />
-      <About />
-      <CaseStudies />
-      <Contact />
+      <HomeClient />
     </>
   );
 }

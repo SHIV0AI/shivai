@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import ThemeWrapper from "./theme-wrapper";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
@@ -128,6 +129,7 @@ export default function RootLayout({
             <main className="min-h-screen">
               {children}
             </main>
+            <Footer />
           </ThemeWrapper>
         </AnalyticsProvider>
       </body>

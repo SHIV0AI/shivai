@@ -11,10 +11,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/get-started`,
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/locations`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/agent-lab`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/neuro-lab`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/get-started`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
     },
   ];
 
