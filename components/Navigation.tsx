@@ -19,14 +19,15 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Create navItems with keys based on translation keys, not translated text
   const navItems = [
-    { name: t("nav.home"), href: "/", prefetch: true },
-    { name: t("nav.services"), href: "/services", prefetch: true },
-    { name: t("nav.about"), href: "/about", prefetch: true },
-    { name: t("nav.contact"), href: "/contact", prefetch: true },
-    { name: "Locations", href: "/locations", prefetch: false },
-    { name: "Agent Lab", href: "/agent-lab", prefetch: false },
-    { name: "Neuro Lab", href: "/neuro-lab", prefetch: false },
+    { id: "home", name: t("nav.home"), href: "/", prefetch: true },
+    { id: "services", name: t("nav.services"), href: "/services", prefetch: true },
+    { id: "about", name: t("nav.about"), href: "/about", prefetch: true },
+    { id: "contact", name: t("nav.contact"), href: "/contact", prefetch: true },
+    { id: "locations", name: "Locations", href: "/locations", prefetch: false },
+    { id: "agent-lab", name: "Agent Lab", href: "/agent-lab", prefetch: false },
+    { id: "neuro-lab", name: "Neuro Lab", href: "/neuro-lab", prefetch: false },
   ];
 
   return (
@@ -34,11 +35,11 @@ const Navigation = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slide-down ${
         isScrolled
           ? "glass-effect shadow-lg shadow-purple-500/10 dark:shadow-purple-500/10"
-          : "bg-transparent"
+          : "glass-effect md:bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-44 md:h-40">
+        <div className="flex justify-between items-center h-24 md:h-20">
           {/* Logo Text Only */}
           <Link href="/" className="flex items-center group">
             <span className="text-3xl sm:text-4xl font-bold gradient-text-neon">SHiV.Ai</span>
@@ -47,7 +48,7 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <div key={item.name}>
+              <div key={item.id}>
                 <Link
                   href={item.href}
                   prefetch={item.prefetch}
@@ -106,10 +107,10 @@ const Navigation = () => {
           isMobileMenuOpen ? "max-h-screen opacity-100 visible" : "max-h-0 opacity-0 invisible"
         }`}
       >
-        <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <div className="px-4 py-6 space-y-4">
           {navItems.map((item) => (
             <Link
-              key={item.name}
+              key={item.id}
               href={item.href}
               onClick={() => setIsMobileMenuOpen(false)}
               className="block text-themed-secondary hover:text-themed-primary transition-colors py-2"

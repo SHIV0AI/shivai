@@ -2,25 +2,27 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-
-const milestones = [
-  { year: "2023", title: "Foundation", description: "Founded by Shivam — first standalone AI project delivered.", gradient: "from-indigo-600 to-blue-600" },
-  { year: "2024", title: "Growth", description: "Co-founders joined. Small-scale AI projects completed.", gradient: "from-blue-600 to-purple-600" },
-  { year: "2025", title: "Formation & Scale", description: "Company registered as Shiv.AI. Team of 10 — AI scientists, developers, PMs. Multiple client deliveries.", gradient: "from-purple-600 to-pink-600" },
-  { year: "2026", title: "Roadmap", description: "Market expansion. Global presence planned — Singapore office.", gradient: "from-pink-600 to-orange-600" },
-];
-
-const values = [
-  { icon: "🎯", title: "Innovation First", description: "Pushing boundaries with cutting-edge AI research" },
-  { icon: "🤝", title: "Client Success", description: "Your success is our ultimate measure of achievement" },
-  { icon: "⚡", title: "Speed & Quality", description: "Rapid delivery without compromising excellence" },
-  { icon: "🌍", title: "Global Impact", description: "Creating solutions that transform industries worldwide" },
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [theme, setTheme] = useState("dark");
+  const { t } = useTranslation();
+
+  const milestones = [
+    { year: t("about.timeline.foundation.year"), title: t("about.timeline.foundation.title"), description: t("about.timeline.foundation.description"), gradient: "from-indigo-600 to-blue-600" },
+    { year: t("about.timeline.growth.year"), title: t("about.timeline.growth.title"), description: t("about.timeline.growth.description"), gradient: "from-blue-600 to-purple-600" },
+    { year: t("about.timeline.formation.year"), title: t("about.timeline.formation.title"), description: t("about.timeline.formation.description"), gradient: "from-purple-600 to-pink-600" },
+    { year: t("about.timeline.expansion.year"), title: t("about.timeline.expansion.title"), description: t("about.timeline.expansion.description"), gradient: "from-pink-600 to-orange-600" },
+  ];
+
+  const values = [
+    { icon: t("about.innovation.icon"), title: t("about.innovation.title"), description: t("about.innovation.description") },
+    { icon: t("about.success.icon"), title: t("about.success.title"), description: t("about.success.description") },
+    { icon: t("about.speed.icon"), title: t("about.speed.title"), description: t("about.speed.description") },
+    { icon: t("about.impact.icon"), title: t("about.impact.title"), description: t("about.impact.description") },
+  ];
 
   useEffect(() => {
     setTheme(document.documentElement.getAttribute("data-theme") || "dark");
@@ -67,15 +69,13 @@ const About = () => {
               color: dark ? "#67e8f9" : "#0891b2",
             }}
           >
-            About Us
+            {t("about.badge")}
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: dark ? "#fff" : "#111827" }}>
-            Pioneering the <span className="gradient-text-neon">Future of AI</span>
+            {t("about.title")} <span className="gradient-text-neon">{t("about.subtitle")}</span>
           </h2>
           <p className="text-lg max-w-3xl mx-auto" style={{ color: dark ? "#9ca3af" : "#6b7280" }}>
-            We are a team of visionary AI engineers, data scientists, and
-            innovators dedicated to transforming businesses through intelligent
-            technology.
+            {t("about.description")}
           </p>
         </motion.div>
 
@@ -85,13 +85,13 @@ const About = () => {
             {
               emoji: "🎯",
               title: "Our Mission",
-              text: "Transform businesses through intelligent agents. Destroy inefficiency. Create autonomous ecosystems that learn, adapt, and deliver unprecedented results.",
+              text: t("about.mission"),
               accent: "indigo",
             },
             {
               emoji: "🔮",
               title: "Our Vision",
-              text: "To be the world's most trusted AI partner, recognized for delivering intelligent solutions that reshape industries and create lasting impact.",
+              text: t("about.vision"),
               accent: "purple",
             },
           ].map((item, i) => (

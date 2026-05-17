@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion"; 
+import { motion, AnimatePresence } from "framer-motion";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 const languages = [
   { code: "en", name: "English", flag: "🇪" },
-{ code: "hi", name: "हिंदी", flag: "🇮🇳" },
+  { code: "hi", name: "हिंदी", flag: "🇮🇳" },
   { code: "es", name: "Español", flag: "🇪🇸" },
   { code: "fr", name: "Français", flag: "🇫🇷" },
   { code: "de", name: "Deutsch", flag: "🇩🇪" },
@@ -15,33 +16,24 @@ const languages = [
 ];
 
 const LanguageToggle = () => {
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const { language, setLanguage } = useLanguageContext();
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Load saved language from localStorage
-    const savedLanguage = localStorage.getItem("language");
-    if (savedLanguage) {
-      setCurrentLanguage(savedLanguage);
-      applyLanguage(savedLanguage);
-    }
+    setMounted(true);
   }, []);
 
-  const applyLanguage = (langCode: string) => {
-    document.documentElement.setAttribute("lang", langCode);
-    localStorage.setItem("language", langCode);
-    
-    // Trigger custom event for language change
-    window.dispatchEvent(new CustomEvent("languageChange", { detail: langCode }));
-  };
-
   const handleLanguageChange = (langCode: string) => {
-    setCurrentLanguage(langCode);
-    applyLanguage(langCode);
+    console.log("🟣 LanguageToggle: Language clicked:", langCode);
+    setLanguage(langCode as any);
+    console.log("🟣 LanguageToggle: setLanguage called");
     setIsOpen(false);
   };
 
-  const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0];
+  if (!mounted) return null;
+
+  const currentLang = languages.find((lang) => lang.code === language) || languages[0];
 
   return (
     <div className="relative">
@@ -93,14 +85,14 @@ const LanguageToggle = () => {
                     whileHover={{ backgroundColor: "rgba(147, 51, 234, 0.1)" }}
                     onClick={() => handleLanguageChange(lang.code)}
                     className={`w-full px-4 py-2.5 text-left flex items-center space-x-3 transition-colors ${
-                      currentLanguage === lang.code
+                      language === lang.code
                         ? "bg-purple-500/20 text-purple-400"
                         : "text-themed-secondary hover:text-themed-primary"
                     }`}
                   >
                     <span className="text-xl">{lang.flag}</span>
                     <span className="text-sm font-medium">{lang.name}</span>
-                    {currentLanguage === lang.code && (
+                    {language === lang.code && (
                       <motion.span
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}

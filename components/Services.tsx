@@ -2,87 +2,89 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-
-const services = [
-  {
-    icon: "🤖",
-    title: "Agentic AI Systems",
-    description: "Autonomous agents that plan, reason, and execute complex workflows across your organization.",
-    features: ["Multi-agent orchestration", "Goal decomposition", "Self-healing pipelines"],
-    gradient: "from-cyan-500 to-purple-600",
-    color: "#00fff5",
-  },
-  {
-    icon: "🧠",
-    title: "Knowledge Ecosystems",
-    description: "Unified knowledge graphs connecting data, documents, and institutional knowledge for AI retrieval.",
-    features: ["RAG pipelines", "Vector search", "Knowledge graphs"],
-    gradient: "from-purple-600 to-pink-600",
-    color: "#bf00ff",
-  },
-  {
-    icon: "⚡",
-    title: "Workflow Automation",
-    description: "Intelligent automation that adapts to context, handles exceptions, and improves continuously.",
-    features: ["Smart routing", "Event-driven triggers", "Adaptive logic"],
-    gradient: "from-blue-600 to-indigo-600",
-    color: "#4361ee",
-  },
-  {
-    icon: "🔬",
-    title: "Deep Learning & NLP",
-    description: "Custom neural networks and language models fine-tuned for your domain and data.",
-    features: ["Model fine-tuning", "Custom LLMs", "Semantic analysis"],
-    gradient: "from-violet-600 to-indigo-600",
-    color: "#7c3aed",
-  },
-  {
-    icon: "👁️",
-    title: "Computer Vision",
-    description: "Production-grade vision systems for detection, segmentation, and visual understanding.",
-    features: ["Real-time detection", "Quality inspection", "Document AI"],
-    gradient: "from-fuchsia-600 to-purple-600",
-    color: "#d946ef",
-  },
-  {
-    icon: "📊",
-    title: "Predictive Analytics",
-    description: "ML-powered forecasting and predictive models that turn historical data into actionable insights.",
-    features: ["Demand forecasting", "Risk scoring", "Churn prediction"],
-    gradient: "from-emerald-600 to-teal-600",
-    color: "#10b981",
-  },
-  {
-    icon: "🛡️",
-    title: "AI Safety & Guardrails",
-    description: "Enterprise-grade safety layers, monitoring, and compliance for responsible AI deployment.",
-    features: ["Output validation", "Bias detection", "Audit trails"],
-    gradient: "from-amber-600 to-orange-600",
-    color: "#f59e0b",
-  },
-  {
-    icon: "🔗",
-    title: "System Integration",
-    description: "Seamless integration of AI capabilities into your existing tech stack and business processes.",
-    features: ["API orchestration", "Legacy system bridging", "Real-time sync"],
-    gradient: "from-cyan-600 to-blue-600",
-    color: "#06b6d4",
-  },
-  {
-    icon: "🚀",
-    title: "MLOps & Deployment",
-    description: "End-to-end ML lifecycle management from training to production monitoring at scale.",
-    features: ["CI/CD for ML", "Model monitoring", "Auto-scaling"],
-    gradient: "from-rose-600 to-pink-600",
-    color: "#f43f5e",
-  },
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [theme, setTheme] = useState("dark");
+  const { t } = useTranslation();
+
+  const services = [
+    {
+      icon: "🤖",
+      title: t("services.agentic.title"),
+      description: t("services.agentic.description"),
+      features: t("services.agentic.features"),
+      gradient: "from-cyan-500 to-purple-600",
+      color: "#00fff5",
+    },
+    {
+      icon: "🧠",
+      title: t("services.knowledge.title"),
+      description: t("services.knowledge.description"),
+      features: t("services.knowledge.features"),
+      gradient: "from-purple-600 to-pink-600",
+      color: "#bf00ff",
+    },
+    {
+      icon: "⚡",
+      title: t("services.workflow.title"),
+      description: t("services.workflow.description"),
+      features: t("services.workflow.features"),
+      gradient: "from-blue-600 to-indigo-600",
+      color: "#4361ee",
+    },
+    {
+      icon: "🔬",
+      title: t("services.deeplearning.title"),
+      description: t("services.deeplearning.description"),
+      features: t("services.deeplearning.features"),
+      gradient: "from-violet-600 to-indigo-600",
+      color: "#7c3aed",
+    },
+    {
+      icon: "👁️",
+      title: t("services.vision.title"),
+      description: t("services.vision.description"),
+      features: t("services.vision.features"),
+      gradient: "from-fuchsia-600 to-purple-600",
+      color: "#d946ef",
+    },
+    {
+      icon: "📊",
+      title: t("services.analytics.title"),
+      description: t("services.analytics.description"),
+      features: t("services.analytics.features"),
+      gradient: "from-emerald-600 to-teal-600",
+      color: "#10b981",
+    },
+    {
+      icon: "🛡️",
+      title: t("services.safety.title"),
+      description: t("services.safety.description"),
+      features: t("services.safety.features"),
+      gradient: "from-amber-600 to-orange-600",
+      color: "#f59e0b",
+    },
+    {
+      icon: "🔗",
+      title: t("services.integration.title"),
+      description: t("services.integration.description"),
+      features: t("services.integration.features"),
+      gradient: "from-cyan-600 to-blue-600",
+      color: "#06b6d4",
+    },
+    {
+      icon: "🚀",
+      title: t("services.mlops.title"),
+      description: t("services.mlops.description"),
+      features: t("services.mlops.features"),
+      gradient: "from-rose-600 to-pink-600",
+      color: "#f43f5e",
+    },
+  ];
 
   useEffect(() => {
     setTheme(document.documentElement.getAttribute("data-theme") || "dark");
@@ -130,15 +132,11 @@ const Services = () => {
               color: dark ? "#00fff5" : "#0891b2",
             }}
           >
-            Our Services
+            {t("services.badge")}
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: dark ? "#fff" : "#111827" }}>
-            AI Solutions That <span className="gradient-text-neon">Deliver Results</span>
+            {t("services.title")} <span className="gradient-text-neon">{t("services.subtitle")}</span>
           </h2>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto" style={{ color: dark ? "#9ca3af" : "#6b7280" }}>
-            From autonomous agents to predictive analytics — we build intelligent systems
-            tailored to your business that unlock unprecedented growth.
-          </p>
         </motion.div>
 
         {/* Services Grid — all visible */}
@@ -196,7 +194,7 @@ const Services = () => {
 
                 {/* Features with animated bullets */}
                 <div className="space-y-2">
-                  {service.features.map((f, fi) => (
+                  {Array.isArray(service.features) && service.features.map((f: string, fi: number) => (
                     <motion.div
                       key={f}
                       initial={{ opacity: 0, x: -10 }}

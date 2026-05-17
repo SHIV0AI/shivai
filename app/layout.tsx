@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ThemeWrapper from "./theme-wrapper";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -124,13 +125,15 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-themed text-themed-primary`}>
         <AnalyticsProvider>
-          <ThemeWrapper>
-            <Navigation />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer />
-          </ThemeWrapper>
+          <LanguageProvider>
+            <ThemeWrapper>
+              <Navigation />
+              <main className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+            </ThemeWrapper>
+          </LanguageProvider>
         </AnalyticsProvider>
       </body>
     </html>
