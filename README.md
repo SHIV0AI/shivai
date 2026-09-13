@@ -58,6 +58,12 @@ npm run dev
 └── public/                  # Static assets
 ```
 
+### BIMI email logo
+
+The BIMI-compatible SVG logo is hosted as a public static asset for email authentication. After deployment, it is available at:
+
+https://shivai.co.in/bimi-logo.svg
+
 ## 🎨 Design Philosophy
 
 - **Dark Mode First**: Elegant dark theme with vibrant accents

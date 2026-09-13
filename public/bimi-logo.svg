@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 512 512" width="512" height="512">
+  <title>ShivAI</title>
+  <desc>ShivAI logo for BIMI email authentication</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9ffff"/>
+      <stop offset="0.28" stop-color="#19aaff"/>
+      <stop offset="0.58" stop-color="#0058e8"/>
+      <stop offset="0.82" stop-color="#32d8ff"/>
+      <stop offset="1" stop-color="#0043b5"/>
+    </linearGradient>
+    <linearGradient id="wordmark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efffff"/>
+      <stop offset="0.45" stop-color="#49cfff"/>
+      <stop offset="1" stop-color="#0063ed"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#000"/>
+  <g fill="none" stroke="url(#blue)" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="256" cy="206" r="149" stroke-width="7"/>
+    <circle cx="256" cy="206" r="157" stroke-width="4"/>
+    <path d="M101 206h310" stroke-width="7"/>
+    <path d="M158 345c12-64 26-126 42-188 10-39 26-70 56-70s46 31 56 70l45 189" stroke-width="7"/>
+    <path d="M144 319c25-38 58-61 98-72 48-13 82-25 112-62" stroke-width="7"/>
+    <path d="M144 319c20-13 42-14 58-1 22 18 30 55 72 63 35 7 66-7 92-27" stroke-width="7"/>
+    <path d="M144 319c-9 22-14 43-16 64" stroke-width="7"/>
+  </g>
+  <circle cx="256" cy="151" r="17" fill="url(#blue)" stroke="#7eeaff" stroke-width="2"/>
+  <g fill="url(#wordmark)" stroke="#008cff" stroke-width="1">
+    <path d="M85 403h15l10 31 11-31h15l-1 44h-11l1-29-10 29h-10l-10-29 1 29H85z"/>
+    <path d="M143 403h12v44h-12z"/>
+    <path d="M166 403h12v17h17v-17h12v44h-12v-17h-17v17h-12z"/>
+    <path d="M218 403h13l10 31 10-31h13l-16 44h-14z"/>
+    <path d="M273 403h12l8 18 8-18h13l-15 27v17h-12v-17z"/>
+    <path d="M327 403h29v10h-17v7h15v10h-15v7h17v10h-29z"/>
+    <path d="M369 403h12v34h17v10h-29z"/>
+    <path d="M409 403h12v44h-12z"/>
+  </g>
+</svg>
