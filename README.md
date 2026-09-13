@@ -64,6 +64,10 @@ The BIMI-compatible SVG logo is hosted as a public static asset for email authen
 
 https://shivai.co.in/bimi-logo.svg
 
+The same square logo is also hosted for email signatures at:
+
+https://shivai.co.in/logo-email.png
+
 ## 🎨 Design Philosophy
 
 - **Dark Mode First**: Elegant dark theme with vibrant accents
